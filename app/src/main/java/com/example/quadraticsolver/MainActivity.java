@@ -3,6 +3,7 @@ package com.example.quadraticsolver;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -19,40 +20,79 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText a = (EditText) findViewById(R.id.a);
-        EditText b = (EditText) findViewById(R.id.b);
-        EditText c = (EditText) findViewById(R.id.c);
-        Button ans = (Button) findViewById(R.id.ans);
-        TextView solution = (TextView) findViewById(R.id.solution);
+        EditText a = (EditText) findViewById(R.id.co_a);
+        EditText b = (EditText) findViewById(R.id.co_b);
+        EditText c = (EditText) findViewById(R.id.co_c);
+        Button answer = (Button) findViewById(R.id.ans);
+        TextView solve = (TextView) findViewById(R.id.solution);
 
-        double ce_a = Double.parseDouble(a.toString());
-        double ce_b = Double.parseDouble(b.toString());
-        double ce_c = Double.parseDouble(c.toString());
 
-        ans.setOnClickListener(new View.OnClickListener() {
+        answer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    if (a.getText().toString().equals("") && b.getText().toString().equals("") && c.getText().toString().equals(""))
+                    if (a.getText().toString().equals(null) &&
+                            b.getText().toString().equals(null) &&
+                            c.getText().toString().equals(null))
                     {
                         report("Check whether you have entered the proper values");
+                        solve.setText("Check your values");
                     }
                     else
                     {
-                        String answer = solution.getText().toString();
-                        answer = "The given quadratic equation is,\n\t"+a+"X² + ("+b+")X + ("+c+")";
-                        delta = (ce_b*ce_b) - (4*ce_a*ce_c);
-                        answer += "The discriminant value is, "+delta;
-                        if(delta>0)
+                        double cea = Double.parseDouble(a.getText().toString());
+                        double ceb = Double.parseDouble(b.getText().toString());
+                        double cec = Double.parseDouble(c.getText().toString());
+                        while(a.getText().toString().equals(""))
                         {
-                            double de = 2*ce_a;
-                            root1 = (-ce_b+Math.sqrt(delta))/de;
-                            root2 = (-ce_b-Math.sqrt(delta))/de;
-                            answer+="The roots are, "+root1+" and "+root2;
+                            cea = 0.0;
                         }
+                        while(b.getText().toString().equals(""))
+                        {
+                            ceb = 0.0;
+                        }
+                        while(c.getText().toString().equals(""))
+                        {
+                            cec = 0.0;
+                        }
+                        String answer = solve.getText().toString();
+                        answer = "The given quadratic equation is,\n" +
+                                "(" +a.getText().toString()+") X² + " +
+                                "("+b.getText().toString()+") X + " +
+                                "("+c.getText().toString()+")";
+                        delta = (ceb*ceb) - (4*cea*cec);
+                        answer += "\nDiscriminant  =  "+delta;
+                        if(delta==0)
+                        {
+                            answer+="\nThe given quadratic equation has real and equal roots";
+                            double de = 2*cea;
+                            root1 = (-ceb)/de;
+                            root2 = (-ceb)/de;
+                            answer+="\nThe roots are,   "+String.format("%.2f",root1)+"  and  "+String.format("%.2f",root2);
+                        }
+                        else if(delta>0)
+                        {
+                            answer+="\nThe given quadratic equation has real and unequal roots";
+                            double de = 2*cea;
+                            root1 = (-ceb+Math.sqrt(delta))/de;
+                            root2 = (-ceb-Math.sqrt(delta))/de;
+                            answer+="\nThe roots are,   "+String.format("%.2f",root1)+"  and  "+String.format("%.2f",root2);
+                        }
+                        else
+                        {
+                            answer+="\nThe given quadratic equation has imaginary roots";
+                            double de = 2*cea;
+                            String nu = String.format("%.2f", ((-ceb)/de));
+                            double com = (Math.sqrt(-1*delta))/de;
+                            answer+="\nThe roots are,\n"
+                                    +nu+" + ("+String.format("%.2f",com)+")i  and  "
+                                    +nu+" - ("+String.format("%.2f",com)+")i";
+                        }
+                        solve.setText(answer);
                     }
                 } catch (Exception exception) {
-                    report("Some error occured");
+                    report("OOPS! Some error occured");
+                    solve.setText("OOPS! Some error occured");
                 }
             }
         });
@@ -70,5 +110,16 @@ public class MainActivity extends AppCompatActivity {
                 }).create();
         show.show();
     }
+
+    /*TextView msg = (TextView) findViewById(R.id.alertmsg);
+    Button back = (Button) findViewById(R.id.ok);
+
+    Dialog alertdialog;
+
+    public void report(String alert) {
+        alertdialog = new Dialog(MainActivity.this);
+        alertdialog.setContentView(R.layout.dialog_design);
+        msg.setText(alert);
+    }*/
 
 }

@@ -52,7 +52,7 @@
             android:paddingBottom="5dp">
 
             <EditText
-                android:id="@+id/a"
+                android:id="@+id/co_a"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
@@ -76,7 +76,7 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/b"
+                android:id="@+id/co_b"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="5dp"
@@ -100,7 +100,7 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/c"
+                android:id="@+id/co_c"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/purple_700"
@@ -170,9 +170,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:ems="10"
+                android:textColor="@color/purple_700"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="start|top"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
         </ScrollView>
 
