@@ -111,15 +111,5 @@ public class MainActivity extends AppCompatActivity {
         show.show();
     }
 
-    /*TextView msg = (TextView) findViewById(R.id.alertmsg);
-    Button back = (Button) findViewById(R.id.ok);
-
-    Dialog alertdialog;
-
-    public void report(String alert) {
-        alertdialog = new Dialog(MainActivity.this);
-        alertdialog.setContentView(R.layout.dialog_design);
-        msg.setText(alert);
-    }*/
 
 }
